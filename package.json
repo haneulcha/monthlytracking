@@ -23,6 +23,8 @@
     "prettier": "^2.0.4"
   },
   "dependencies": {
+    "calendar": "^0.1.1",
+    "circle": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
