@@ -1,6 +1,6 @@
 import React from "react";
 import Calendar from "./calendar";
-import Month from "./month";
+
 import ReactDOM from "react-dom";
 
 class App extends React.Component {
@@ -11,12 +11,12 @@ class App extends React.Component {
     };
   }
 
-  setLS() {
-    localStorage.setItem("Monthly", JSON.stringify(this.state.history));
+  setLS(key, item) {
+    localStorage.setItem(key, JSON.stringify(item));
   }
-  getLS() {
-    const parsedMonthly = JSON.parse(localStorage.getItem("Monthly"));
-    if (parsedMonthly) this.setState({ history: parsedMonthly });
+  getLS(key) {
+    const parsedItem = JSON.parse(localStorage.getItem(key));
+    if (parsedItem) this.setState({ history: parsedItem });
   }
 
   handleClick(i) {
@@ -26,24 +26,24 @@ class App extends React.Component {
     this.setState({
       history: dates,
     });
-    this.setLS();
+    this.setLS("Monthly", this.state.history);
   }
 
   componentDidMount() {
-    this.getLS();
+    this.getLS("Monthly");
   }
 
   componentDidUpdate() {
-    this.setLS();
+    this.setLS("Monthly", this.state.history);
   }
 
   render() {
     return (
       <div>
-        <Month />
         <Calendar
           circle={this.state.history}
           onClick={(i) => this.handleClick(i)}
+          setLS={this.setLS}
         />
         {console.log(this.state.history)}
       </div>

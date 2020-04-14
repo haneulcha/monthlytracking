@@ -1,4 +1,5 @@
 import React from "react";
+import Month from "./month";
 import Circle from "./circle";
 
 class Calendar extends React.Component {
@@ -9,7 +10,7 @@ class Calendar extends React.Component {
 
     let lastDay = new Date(year, month + 1, 0);
 
-    return lastDay.getDate();
+    return [month + 1, lastDay.getDate()];
     //return 28, 29, 30, 31
   }
 
@@ -26,6 +27,7 @@ class Calendar extends React.Component {
   render() {
     return (
       <div>
+        <Month setLS={this.props.setLS} thisMonth={this.LastDayOfMonth()[0]} />
         <div>
           {this.renderDay(0)}
           {this.renderDay(1)}
@@ -54,10 +56,10 @@ class Calendar extends React.Component {
           {this.renderDay(24)}
           {this.renderDay(25)}
           {this.renderDay(26)}
-          {this.LastDayOfMonth() > 27 ? this.renderDay(27) : ""}
-          {this.LastDayOfMonth() > 28 ? this.renderDay(28) : ""}
-          {this.LastDayOfMonth() > 29 ? this.renderDay(29) : ""}
-          {this.LastDayOfMonth() > 30 ? this.renderDay(30) : ""}
+          {this.LastDayOfMonth()[1] > 27 ? this.renderDay(27) : ""}
+          {this.LastDayOfMonth()[1] > 28 ? this.renderDay(28) : ""}
+          {this.LastDayOfMonth()[1] > 29 ? this.renderDay(29) : ""}
+          {this.LastDayOfMonth()[1] > 30 ? this.renderDay(30) : ""}
         </div>
       </div>
     );
